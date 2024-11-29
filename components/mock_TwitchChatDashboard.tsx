@@ -17,7 +17,9 @@ import {
 import Component from "./mock_TwitchChat";
 import { BADGES, PRESET_CHAT_COLORS } from "./mock_TwitchChat";
 import type { ChatMessage } from "./mock_TwitchChat";
-
+import Image from "next/image";
+// @ts-ignore
+import blub from "@/public/icons/blub-full.svg?url";
 export default function Dashboard() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState<ChatMessage>({
@@ -58,6 +60,17 @@ export default function Dashboard() {
 
   return (
     <div className="flex h-screen">
+      <div className="absolute top-0 right-0 text-white opacity-50 text-base p-2 flex items-center gap-2">
+        <h1>made by</h1>
+        <Image
+          className="min-w-4 h-7 object-scale-down mr-1"
+          src={blub}
+          alt="blubstudios"
+          width={80}
+          height={100}
+        />
+      </div>
+
       <div className="w-1/2 p-4 bg-gray-100 overflow-auto">
         <h2 className="text-2xl font-bold mb-4">Twitch Chat Dashboard</h2>
         <div className="space-y-4">
@@ -142,7 +155,7 @@ export default function Dashboard() {
                     htmlFor={badge}
                     className="flex items-center space-x-2"
                   >
-                    <img src={url} alt={badge} className="w-4 h-4" />
+                    <img src={url} alt={badge} className="min-w-4 h-4" />
                     <span>{badge}</span>
                   </Label>
                 </div>
@@ -164,7 +177,7 @@ export default function Dashboard() {
                       key={badge}
                       src={BADGES[badge]}
                       alt={badge}
-                      className="w-4 h-4 inline mr-1"
+                      className="min-w-4 h-4 inline mr-1"
                     />
                   ))}
                   <span style={{ color: msg.color }}>{msg.username}</span>:{" "}

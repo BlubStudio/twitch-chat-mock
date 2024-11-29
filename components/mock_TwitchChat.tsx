@@ -38,6 +38,7 @@ export const BADGES = {
     "https://static-cdn.jtvnw.net/badges/v1/9ef7e029-4cdf-4d4d-a0d5-e2b3fb2583fe/1",
   staff:
     "https://static-cdn.jtvnw.net/badges/v1/d97c37bd-a6f5-4c38-8f57-4e4bef88af34/1",
+  blub: "./icons/blub.png",
 };
 
 export const PRESET_CHAT_COLORS = {
@@ -99,12 +100,14 @@ export default function Component({ messages }: { messages: ChatMessage[] }) {
       <div className="p-2">
         <div className=" rounded-lg bg-[#1F1F23] p-2 border border-[#2F2F35]">
           <div className="flex items-center gap-2 text-sm">
-            <span className="text-[#ADADB8]">📌 Pinned by ✅ BlubStudio</span>
+            <span className="text-[#ADADB8]">📌 Made by ✅ BlubStudio</span>
             <button className="ml-auto hover:bg-[#2F2F35] p-1 rounded">
               <ChevronDown className="h-4 w-4" />
             </button>
           </div>
-          <div className="font-medium">Check us out at @ blob.productions</div>
+          <div className="font-medium">
+            Check out our app @ blob.productions
+          </div>
         </div>
       </div>
 
@@ -173,7 +176,7 @@ const Message = ({ msg }: { msg: ChatMessage }) => {
           key={badge}
           src={BADGES[badge]}
           alt={badge}
-          className="w-4 h-4 inline-block mr-1"
+          className="min-w-4 h-4 inline-block mr-1"
         />
       ))}
       <span className="font-semibold" style={{ color: msg.color }}>
