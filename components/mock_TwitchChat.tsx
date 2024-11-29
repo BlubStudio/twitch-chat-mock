@@ -4,7 +4,8 @@ import { ChevronDown } from "lucide-react";
 import { Icon } from "./icons";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { ScrollArea } from "./ui/scroll-area";
+import * as ScrollArea from "@radix-ui/react-scroll-area";
+import { useEffect, useRef } from "react";
 
 const GIFTS = {
   gold: "https://assets.twitch.tv/assets/GiftBadge-Gold_72-6e5e65687a6ca6959e08.png",
@@ -59,6 +60,14 @@ export const PRESET_CHAT_COLORS = {
   HotPink: "#E06CB9",
 };
 export default function Component({ messages }: { messages: ChatMessage[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   return (
     <div className="absolute bottom-0 right-0 w-full max-w-[340px] bg-[#17171A] text-[#EFEFF1] h-[calc(100vh-50px)] flex flex-col overflow-hidden">
       {/* Header */}
@@ -112,11 +121,21 @@ export default function Component({ messages }: { messages: ChatMessage[] }) {
       </div>
 
       {/* Chat Messages */}
-      <ScrollArea className="flex-1 px-2 py-1 space-y-1">
-        {messages.map((msg) => (
-          <Message key={msg.id} msg={msg} />
-        ))}
-      </ScrollArea>
+      <ScrollArea.Root className="relative overflow-hidden flex-1 px-2 py-1 space-y-1">
+        <ScrollArea.Viewport className="size-full rounded" ref={scrollRef}>
+          {messages.map((msg) => (
+            <Message key={msg.id} msg={msg} />
+          ))}
+        </ScrollArea.Viewport>
+        <ScrollArea.Scrollbar
+          className="flex touch-none select-none bg-blackA3 p-0.5 w-2.5"
+          orientation="vertical"
+        >
+          <ScrollArea.Thumb className="relative flex-1 rounded-full bg-[#69696A]" />
+        </ScrollArea.Scrollbar>
+
+        <ScrollArea.Corner />
+      </ScrollArea.Root>
 
       {/* Chat Input */}
       <div className="p-2">

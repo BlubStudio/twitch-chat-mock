@@ -18,7 +18,7 @@ import Component from "./mock_TwitchChat";
 import { BADGES, PRESET_CHAT_COLORS } from "./mock_TwitchChat";
 import type { ChatMessage } from "./mock_TwitchChat";
 import Image from "next/image";
-// @ts-ignore
+// @ts-expect-error url import
 import blub from "@/public/icons/blub-full.svg?url";
 export default function Dashboard() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -35,13 +35,13 @@ export default function Dashboard() {
   const handleAddMessage = () => {
     if (newMessage.username && newMessage.message) {
       setMessages([...messages, { ...newMessage, id: Date.now().toString() }]);
-      setNewMessage({
-        id: "",
-        username: "",
-        message: "",
-        color: PRESET_CHAT_COLORS.Red,
-        badges: [],
-      });
+    //   setNewMessage({
+    //     id: "",
+    //     username: "",
+    //     message: "",
+    //     color: PRESET_CHAT_COLORS.Red,
+    //     badges: [],
+    //   });
     }
   };
 
