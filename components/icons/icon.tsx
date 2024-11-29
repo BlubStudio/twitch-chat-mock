@@ -48,6 +48,7 @@ export const Icon = ({
     color: color || "currentColor",
     size: size,
     weight: weight,
+    className: cn("fill-current", className),
     ...rest,
   };
 
@@ -65,10 +66,7 @@ export const Icon = ({
       {...rest}
     >
       <Suspense fallback={null}>
-        <IconComponent
-          {...iconProps}
-          className={cn("fill-current", className)}
-        />
+        <IconComponent {...iconProps} />
       </Suspense>
     </div>
   );
